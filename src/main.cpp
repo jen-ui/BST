@@ -9,18 +9,17 @@
 using namespace std;
 #include "arrayBST.h"
 
-
-int main(){
+int main()
+{
     arrayBST A;
-    
-    node x(8, "jen");       //generating a node to add to the binary search tree
+
+    node x(8, "jen"); // generating a node to add to the binary search tree
     A.add(x);
     node y(3, "ken");
     A.add(y);
-    //cout << "main" << endl;
-    node z(10,"len");
+    node z(10, "len");
     A.add(z);
-    node c( 1, "ten");
+    node c(1, "ten");
     A.add(c);
     node a(6, "ldf");
     A.add(a);
@@ -33,11 +32,11 @@ int main(){
     A.add(e);
     A.add(f);
 
-    
     cout << "\n=>before removing:" << endl;
 
-    for (int i = 0; i < MAXSIZE;i++){           //prints the content of binary search tree 
-        cout << A.array[i].key <<"\t";
+    for (int i = 0; i < MAXSIZE; i++)
+    { // prints the content of binary search tree
+        cout << A.array[i].key << "\t";
     }
     cout << "\n\n=>seraching for 14..." << A.search(14) << endl;
     cout << "\n=>searching for 99..." << A.search(99) << endl;
@@ -45,8 +44,8 @@ int main(){
     A.remove(10);
 
     cout << "\n=>after removing 10:" << endl;
-    for (int i = 0; i < MAXSIZE; i++)           //prints the content of binary searh tree after removal of a node
+    for (int i = 0; i < MAXSIZE; i++) // prints the content of binary searh tree after removal of a node
     {
-        cout << A.array[i].key <<"\t";
+        cout << A.array[i].key << "\t";
     }
 }

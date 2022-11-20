@@ -1,4 +1,4 @@
-/* 
+/*
     @file arrayBST.cpp
     @author Jenisha Khulal
     @purpose contains funtion definition of the BST methods declared in the file arrayBST.h
@@ -6,23 +6,26 @@
 
 #include "arrayBST.h"
 
-//default constructor for class node
+// default constructor for class node
 
-node::node(){
+node::node()
+{
     key = 0;
     value = "/0";
 }
 
-//parametarized constructor for class node
+// parametarized constructor for class node
 
-node::node(int key,string value){
+node::node(int key, string value)
+{
     this->key = key;
     this->value = value;
 }
 
-//destructor for class node
+// destructor for class node
 
-node::~node(){
+node::~node()
+{
     key = 0;
     value = "/0";
 }
@@ -32,7 +35,8 @@ node::~node(){
     initializes an array of object node
 */
 
-arrayBST::arrayBST(){
+arrayBST::arrayBST()
+{
     array = new node[MAXSIZE];
 }
 
@@ -41,8 +45,10 @@ arrayBST::arrayBST(){
     @param rootIndex index of root to be checked
     @return true if the root is empty
 */
-bool arrayBST::isEmpty(int rootIndex){
-    if(!array[rootIndex].key||(rootIndex>=MAXSIZE)){
+bool arrayBST::isEmpty(int rootIndex)
+{
+    if (!array[rootIndex].key || (rootIndex >= MAXSIZE))
+    {
         return true;
     }
     else
@@ -55,22 +61,25 @@ bool arrayBST::isEmpty(int rootIndex){
     @param rootIndex index of root,1 by default
     @return true if the node is added
 */
-int arrayBST::add(node newNode,int rootIndex)
+int arrayBST::add(node newNode, int rootIndex)
 {
     rightSubtreeIndex = rootIndex * 2 + 1;
     leftSubtreeIndex = rootIndex * 2;
-   
-    if(isEmpty(rootIndex)){
-        
+
+    if (isEmpty(rootIndex))
+    {
+
         array[rootIndex] = newNode;
         return rootIndex;
     }
-    if(newNode.key>array[rootIndex].key){
-        
+    if (newNode.key > array[rootIndex].key)
+    {
+
         return add(newNode, rightSubtreeIndex);
     }
-    else {
-        
+    else
+    {
+
         return add(newNode, leftSubtreeIndex);
     }
 }
@@ -79,23 +88,28 @@ int arrayBST::add(node newNode,int rootIndex)
     This function seraches for a given key in binary search tree
     @param key key to be searched
     @param rootIndex index of root, 1 by default
-    @return true if the key is found 
+    @return true if the key is found
 */
-bool arrayBST::search(int key,int rootIndex){
+bool arrayBST::search(int key, int rootIndex)
+{
     leftSubtreeIndex = rootIndex * 2;
     rightSubtreeIndex = rootIndex * 2 + 1;
-    if(isEmpty(rootIndex)){
+    if (isEmpty(rootIndex))
+    {
         return false;
     }
-    if(key>array[rootIndex].key){
-        //rootIndex = rightSubtreeIndex;
+    if (key > array[rootIndex].key)
+    {
+
         return search(key, rightSubtreeIndex);
     }
-    else if(key<array[rootIndex].key){
-        // rootIndex = leftSubtreeIndex;
+    else if (key < array[rootIndex].key)
+    {
+
         return search(key, leftSubtreeIndex);
     }
-    else{
+    else
+    {
         return true;
     }
 }
@@ -108,11 +122,13 @@ bool arrayBST::search(int key,int rootIndex){
 int arrayBST::largest(int rootIndex)
 {
     rightSubtreeIndex = rootIndex * 2 + 1;
-    if(isEmpty(rightSubtreeIndex)){
+    if (isEmpty(rightSubtreeIndex))
+    {
         return rootIndex;
     }
-    else{
-       
+    else
+    {
+
         return largest(rightSubtreeIndex);
     }
 }
@@ -122,13 +138,16 @@ int arrayBST::largest(int rootIndex)
     @param rootIndex root of the tree to be searched
     @return array index of node which has the smallest key
 */
-int arrayBST::smallest(int rootIndex){
+int arrayBST::smallest(int rootIndex)
+{
     leftSubtreeIndex = 2 * rootIndex;
-    if(isEmpty(leftSubtreeIndex)){
+    if (isEmpty(leftSubtreeIndex))
+    {
         return rootIndex;
     }
-    else{
-        //rootIndex = leftSubtreeIndex;
+    else
+    {
+
         return smallest(leftSubtreeIndex);
     }
 }
@@ -136,38 +155,46 @@ int arrayBST::smallest(int rootIndex){
 /*
     This function removes a node from the tree
     @param key key to be removed
-    @param rootIndex index of root, 1 by default 
+    @param rootIndex index of root, 1 by default
 */
-bool arrayBST::remove(int key,int rootIndex){
+bool arrayBST::remove(int key, int rootIndex)
+{
     rightSubtreeIndex = rootIndex * 2 + 1;
     leftSubtreeIndex = rootIndex * 2;
-    if(isEmpty(rootIndex)){
+    if (isEmpty(rootIndex))
+    {
         return false;
     }
-    if(key>array[rootIndex].key){
+    if (key > array[rootIndex].key)
+    {
         return remove(key, rightSubtreeIndex);
     }
-    else if(key<array[rootIndex].key){
+    else if (key < array[rootIndex].key)
+    {
         return remove(key, leftSubtreeIndex);
     }
-    else{
-        //cout << array[8].value<<endl;
-        if(isEmpty(leftSubtreeIndex)&&isEmpty(rightSubtreeIndex)){
+    else
+    {
+
+        if (isEmpty(leftSubtreeIndex) && isEmpty(rightSubtreeIndex))
+        {
             array[rootIndex].~node();
         }
-        else if(isEmpty(leftSubtreeIndex)){
-         
+        else if (isEmpty(leftSubtreeIndex))
+        {
+
             array[rootIndex] = array[rightSubtreeIndex];
-          
-            //(array[rightSubtreeIndex]).~node();
-            return remove(array[rootIndex].key,rightSubtreeIndex);
+
+            return remove(array[rootIndex].key, rightSubtreeIndex);
         }
-        else if(isEmpty(rightSubtreeIndex)){
+        else if (isEmpty(rightSubtreeIndex))
+        {
             array[rootIndex] = array[leftSubtreeIndex];
-            //array[leftSubtreeIndex].~node();
-            return remove(array[rootIndex].key,leftSubtreeIndex);
+
+            return remove(array[rootIndex].key, leftSubtreeIndex);
         }
-        else{
+        else
+        {
             int large = largest(leftSubtreeIndex);
 
             array[rootIndex] = array[large];
@@ -175,9 +202,4 @@ bool arrayBST::remove(int key,int rootIndex){
             return remove(array[large].key, leftSubtreeIndex);
         }
     }
-
 }
-
-
-
-

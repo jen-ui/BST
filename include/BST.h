@@ -7,24 +7,24 @@
 #include <iostream>
 using namespace std;
 
-//class node for nodes of BST
+// class node for nodes of BST
 class node
 {
 public:
     node();
     ~node();
     node(int, string);
-    int key;            
-    string value;       
+    int key;
+    string value;
 };
 // interface class for BST
 class BST
 {
 public:
-    virtual int add(node,int) = 0;
-    virtual bool remove(int,int) = 0;
-    virtual bool search(int,int) = 0;
-    virtual bool isEmpty(int ) = 0;
+    virtual int add(node, int) = 0;
+    virtual bool remove(int, int) = 0;
+    virtual bool search(int, int) = 0;
+    virtual bool isEmpty(int) = 0;
     virtual int largest(int) = 0;
     virtual int smallest(int) = 0;
 };
