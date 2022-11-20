@@ -19,7 +19,7 @@ public:
     bool isEmpty(int);
     int largest(int);
     int smallest(int);
-    bool noChildren(int rootIndex);
+   
 
     node *array; // array to use as BST
 

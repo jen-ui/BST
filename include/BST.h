@@ -27,5 +27,5 @@ public:
     virtual bool isEmpty(int) = 0;
     virtual int largest(int) = 0;
     virtual int smallest(int) = 0;
-    virtual bool noChildren(int) = 0;
+    
 };
