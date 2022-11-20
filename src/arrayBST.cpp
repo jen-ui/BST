@@ -180,14 +180,14 @@ bool arrayBST::remove(int key, int rootIndex)
         {
             array[rootIndex].~node();
         }
-        else if (isEmpty(leftSubtreeIndex))
+        else if (isEmpty(leftSubtreeIndex)&& noChildren(rightSubtreeIndex))// this is used only if the node to be deleted has right child only and that rightchild has no children
         {
 
             array[rootIndex] = array[rightSubtreeIndex];
 
             return remove(array[rootIndex].key, rightSubtreeIndex);
         }
-        else if (isEmpty(rightSubtreeIndex))
+        else if (isEmpty(rightSubtreeIndex)&&noChildren(leftSubtreeIndex))
         {
             array[rootIndex] = array[leftSubtreeIndex];
 
@@ -195,11 +195,38 @@ bool arrayBST::remove(int key, int rootIndex)
         }
         else
         {
-            int large = largest(leftSubtreeIndex);
+            if(!isEmpty(leftSubtreeIndex)){
+                int large = largest(leftSubtreeIndex);
 
-            array[rootIndex] = array[large];
+                array[rootIndex] = array[large];
 
-            return remove(array[large].key, leftSubtreeIndex);
+                return remove(array[large].key, leftSubtreeIndex);
+            }
+            else{
+                int small = smallest(rightSubtreeIndex);
+
+                array[rootIndex] = array[small];
+
+                return remove(array[small].key, rightSubtreeIndex);
+            }
+        
         }
     }
+
 }
+/*
+    this function checks if the given node has any children
+    @param rootIndex index of node to be checked
+    @return true if the  node has no child
+*/
+bool arrayBST:: noChildren(int rootIndex){
+    int right = rootIndex * 2 + 1;
+    int left = rootIndex * 2;
+    if(isEmpty(left)&&isEmpty(right)){
+        return true;
+    }
+    else
+        return false;
+}
+
+

@@ -41,6 +41,9 @@ int main()
     cout << "\n\n=>seraching for 14..." << A.search(14) << endl;
     cout << "\n=>searching for 99..." << A.search(99) << endl;
 
+    cout << "\nchecking if given nodes have no children:(1 if no children)" << endl;
+    cout <<"\nindex 4:"<< A.noChildren(4) << ".." <<"index 1:"<<A.noChildren(1) << endl;//checking if the given node indexes have children
+
     A.remove(10);
 
     cout << "\n=>after removing 10:" << endl;
